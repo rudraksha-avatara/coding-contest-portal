@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Find Registration ID • Coding Contest</title>
+    <meta
+      name="description"
+      content="Recover your Registration ID using registered email and phone."
+    />
+
+    <!-- Tailwind CDN (optional; app.css handles layout too) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Reusable global styles -->
+    <link rel="stylesheet" href="./assets/css/app.css" />
+
+    <!-- Firebase v8 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="./assets/js/firebase-config.js"></script>
+    <script src="./assets/js/app-common.js"></script>
+  </head>
+
+  <body class="sx-body">
+    <!-- Background -->
+    <div class="sx-bg">
+      <div class="sx-bg-layer sx-bg-grad"></div>
+      <div class="sx-bg-layer sx-bg-grid"></div>
+      <div class="sx-blob sx-blob-a"></div>
+      <div class="sx-blob sx-blob-b"></div>
+      <div class="sx-blob sx-blob-c"></div>
+    </div>
+
+    <div class="sx-container">
+      <!-- Header -->
+      <header class="sx-header">
+        <div class="sx-header-inner">
+          <!-- Brand -->
+          <a href="./index.html" class="sx-brand">
+            <div class="sx-logo-wrap" aria-hidden="true">
+              <div class="sx-logo">CC</div>
+            </div>
+            <div class="sx-brand-text">
+              <h1 class="sx-title">Find Registration ID</h1>
+              <p class="sx-subtitle">Recover using Email + Phone</p>
+            </div>
+          </a>
+
+          <!-- Desktop Nav -->
+          <nav class="sx-nav sx-nav-desktop" aria-label="Primary">
+            <a class="sx-link" href="./index.html">Home</a>
+            <a class="sx-link" href="./register.html">Register</a>
+            <a class="sx-link" href="./submit.html">Submit</a>
+            <a class="sx-btn sx-btn-primary" href="./find-submission-id.html"
+              >Find Submission ID</a
+            >
+          </nav>
+
+          <!-- Mobile button -->
+          <button
+            class="sx-menu-btn"
+            type="button"
+            aria-label="Open menu"
+            onclick="sxToggleMenu(true)"
+          >
+            <span class="sx-menu-icon"></span>
+          </button>
+        </div>
+
+        <!-- Mobile drawer -->
+        <div class="sx-drawer" id="sxDrawer" aria-hidden="true">
+          <div class="sx-drawer-panel">
+            <div class="sx-drawer-top">
+              <div class="sx-drawer-brand">
+                <div class="sx-logo-wrap" aria-hidden="true">
+                  <div class="sx-logo">CC</div>
+                </div>
+                <div>
+                  <div class="sx-drawer-title">Find Registration ID</div>
+                  <div class="sx-drawer-sub">Navigation</div>
+                </div>
+              </div>
+              <button
+                class="sx-x"
+                type="button"
+                aria-label="Close menu"
+                onclick="sxToggleMenu(false)"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div class="sx-drawer-links">
+              <a class="sx-drawer-link" href="./index.html">Home</a>
+              <a class="sx-drawer-link" href="./register.html">Register</a>
+              <a class="sx-drawer-link" href="./submit.html">Submit</a>
+              <a class="sx-drawer-link" href="./find-submission-id.html"
+                >Find Submission ID</a
+              >
+            </div>
+
+            <div class="sx-drawer-note">
+              Tip: Use the same email & phone you used during registration.
+            </div>
+          </div>
+
+          <button
+            class="sx-drawer-backdrop"
+            type="button"
+            aria-label="Close menu"
+            onclick="sxToggleMenu(false)"
+          ></button>
+        </div>
+      </header>
+
+      <!-- Main -->
+      <main class="sx-main">
+        <!-- Intro card -->
+        <section class="sx-card sx-card-soft">
+          <div class="sx-row">
+            <div>
+              <div class="sx-badge">🔎 ID Recovery</div>
+              <h2 class="sx-h2">Recover your Registration ID</h2>
+              <p class="sx-muted">
+                If you already registered but forgot your Registration ID, enter
+                your
+                <b>registered email</b> and <b>registered phone</b>.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- Form card -->
+        <section class="sx-card" style="margin-top: 14px">
+          <div class="sx-card-head">
+            <div>
+              <h3 class="sx-h3">Recover ID</h3>
+              <p class="sx-muted">Enter details exactly as you registered.</p>
+            </div>
+            <div class="sx-pill" id="hint">Ready</div>
+          </div>
+
+          <form id="findForm" class="sx-form" novalidate>
+            <div class="sx-form-grid">
+              <div class="sx-field">
+                <label for="email">Registered Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                />
+                <small class="sx-help">Example: name@gmail.com</small>
+              </div>
+
+              <div class="sx-field">
+                <label for="phone">Registered Phone</label>
+                <input
+                  id="phone"
+                  required
+                  placeholder="10-digit phone"
+                  inputmode="numeric"
+                  autocomplete="tel"
+                />
+                <small class="sx-help">Only numbers (10 digits)</small>
+              </div>
+            </div>
+
+            <div class="sx-actions" style="margin-top: 12px">
+              <button id="btnFind" class="sx-btn sx-btn-primary" type="submit">
+                Find Registration ID
+              </button>
+
+              <a class="sx-btn sx-btn-ghost" href="./register.html">
+                Register New
+              </a>
+            </div>
+          </form>
+
+          <!-- Result box -->
+          <div
+            id="resultBox"
+            class="sx-card sx-result"
+            style="margin-top: 14px; display: none"
+          >
+            <div class="sx-card-head">
+              <div>
+                <h3 class="sx-h3">✅ Found</h3>
+                <p class="sx-muted">Keep this Registration ID safe.</p>
+              </div>
+              <div class="sx-pill">Success</div>
+            </div>
+
+            <div class="sx-kv sx-break" id="resultKv"></div>
+
+            <div class="sx-actions" style="margin-top: 12px">
+              <button class="sx-btn sx-btn-primary" id="copyBtn" type="button">
+                Copy Registration ID
+              </button>
+              <a class="sx-btn sx-btn-ghost" href="./submit.html"
+                >Go to Submit</a
+              >
+            </div>
+          </div>
+
+          <!-- Note -->
+          <div class="sx-note" style="margin-top: 14px">
+            <div class="sx-note-icon" aria-hidden="true">🔐</div>
+            <div class="sx-note-text">
+              <div class="sx-note-title">Security Note</div>
+              <div class="sx-note-desc">
+                For assignment this page searches inside registrations. In
+                production, use secure auth/OTP to prevent misuse.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="sx-footer">
+          <div class="sx-footer-inner">
+            <span>Tip: Keep Registration ID saved for submission.</span>
+            <span class="sx-dot">•</span>
+            <span>Use Find Submission ID if you already submitted.</span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="sx-toast" aria-live="polite"></div>
+
+    <script src="./assets/js/find-id.js"></script>
+
+    <!-- Drawer logic -->
+    <script>
+      function sxToggleMenu(open) {
+        const d = document.getElementById("sxDrawer");
+        if (!d) return;
+        d.classList.toggle("sx-open", !!open);
+        d.setAttribute("aria-hidden", open ? "false" : "true");
+        document.documentElement.classList.toggle("sx-lock", !!open);
+        document.body.classList.toggle("sx-lock", !!open);
+      }
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") sxToggleMenu(false);
+      });
+    </script>
+  </body>
+</html>

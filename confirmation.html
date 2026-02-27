@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Confirmation • Coding Contest</title>
+    <meta name="description" content="Submission confirmation and details." />
+
+    <!-- Tailwind CDN (optional, works with app.css visuals too) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Reusable global styles -->
+    <link rel="stylesheet" href="./assets/css/app.css" />
+
+    <!-- Firebase v8 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="./assets/js/firebase-config.js"></script>
+    <script src="./assets/js/app-common.js"></script>
+  </head>
+
+  <body class="sx-body">
+    <!-- Background -->
+    <div class="sx-bg">
+      <div class="sx-bg-layer sx-bg-grad"></div>
+      <div class="sx-bg-layer sx-bg-grid"></div>
+      <div class="sx-blob sx-blob-a"></div>
+      <div class="sx-blob sx-blob-b"></div>
+      <div class="sx-blob sx-blob-c"></div>
+    </div>
+
+    <div class="sx-container">
+      <!-- Header -->
+      <header class="sx-header">
+        <div class="sx-header-inner">
+          <a href="./index.html" class="sx-brand">
+            <div class="sx-logo-wrap" aria-hidden="true">
+              <div class="sx-logo">CC</div>
+            </div>
+            <div class="sx-brand-text">
+              <h1 class="sx-title">Submission Confirmation</h1>
+              <p class="sx-subtitle">Your submission details</p>
+            </div>
+          </a>
+
+          <!-- Desktop nav -->
+          <nav class="sx-nav sx-nav-desktop" aria-label="Primary">
+            <a class="sx-link" href="./index.html">Home</a>
+            <a class="sx-link" href="./submit.html">Submit Another</a>
+            <a class="sx-btn sx-btn-primary" href="./admin.html"
+              >Admin Dashboard</a
+            >
+          </nav>
+
+          <!-- Mobile menu button -->
+          <button
+            class="sx-menu-btn"
+            type="button"
+            aria-label="Open menu"
+            onclick="sxToggleMenu(true)"
+          >
+            <span class="sx-menu-icon"></span>
+          </button>
+        </div>
+
+        <!-- Mobile drawer -->
+        <div class="sx-drawer" id="sxDrawer" aria-hidden="true">
+          <div class="sx-drawer-panel">
+            <div class="sx-drawer-top">
+              <div class="sx-drawer-brand">
+                <div class="sx-logo-wrap" aria-hidden="true">
+                  <div class="sx-logo">CC</div>
+                </div>
+                <div>
+                  <div class="sx-drawer-title">Confirmation</div>
+                  <div class="sx-drawer-sub">Navigation</div>
+                </div>
+              </div>
+              <button
+                class="sx-x"
+                type="button"
+                aria-label="Close menu"
+                onclick="sxToggleMenu(false)"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div class="sx-drawer-links">
+              <a class="sx-drawer-link" href="./index.html">Home</a>
+              <a class="sx-drawer-link" href="./submit.html">Submit Another</a>
+              <a class="sx-drawer-link" href="./admin.html">Admin Dashboard</a>
+            </div>
+
+            <div class="sx-drawer-note">
+              If you don’t see data, open this page with
+              <b>?sid=SUBMISSION_ID</b>
+            </div>
+          </div>
+
+          <button
+            class="sx-drawer-backdrop"
+            type="button"
+            aria-label="Close menu"
+            onclick="sxToggleMenu(false)"
+          ></button>
+        </div>
+      </header>
+
+      <!-- Main -->
+      <main class="sx-main">
+        <!-- Success hero -->
+        <section class="sx-card sx-card-soft">
+          <div class="sx-row">
+            <div>
+              <div class="sx-badge">✅ Submitted successfully</div>
+              <h2 class="sx-h2">Your submission has been recorded</h2>
+              <p class="sx-muted">
+                Keep your <b>Submission ID</b> for future reference. You can use
+                it to find your submission later.
+              </p>
+            </div>
+
+            <div class="sx-actions">
+              <button class="sx-btn sx-btn-primary" id="copyBtn" type="button">
+                Copy Submission ID
+              </button>
+              <a class="sx-btn sx-btn-ghost" href="./submit.html"
+                >Submit Another</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <!-- Details box -->
+        <section class="sx-card" style="margin-top: 14px">
+          <div class="sx-card-head">
+            <div>
+              <h3 class="sx-h3">Submission Details</h3>
+              <p class="sx-muted">
+                Loaded using <span class="sx-break">?sid=SUBMISSION_ID</span>
+              </p>
+            </div>
+
+            <div class="sx-pill" id="loadState">Loading…</div>
+          </div>
+
+          <!-- This is where confirmation.js renders data -->
+          <div id="box" class="sx-break">
+            <div class="sx-skeleton">
+              <div class="sx-skel-line w-64"></div>
+              <div class="sx-skel-line w-80"></div>
+              <div class="sx-skel-line w-60"></div>
+            </div>
+          </div>
+
+          <!-- Helpful CTA -->
+          <div class="sx-note" style="margin-top: 12px">
+            <div class="sx-note-icon" aria-hidden="true">ℹ️</div>
+            <div class="sx-note-text">
+              <div class="sx-note-title">Not seeing details?</div>
+              <div class="sx-note-desc sx-break">
+                Open this page as:
+                <b>confirmation.html?sid=YOUR_SUBMISSION_ID</b>
+              </div>
+            </div>
+          </div>
+
+          <!-- Buttons -->
+          <div class="sx-actions" style="margin-top: 14px">
+            <a class="sx-btn sx-btn-ghost" href="./index.html">Back to Home</a>
+            <a class="sx-btn sx-btn-ghost" href="./find-submission-id.html"
+              >Find Submission ID</a
+            >
+          </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="sx-footer">
+          <div class="sx-footer-inner">
+            <span>If you don’t see data, open with ?sid=SUBMISSION_ID</span>
+            <span class="sx-dot">•</span>
+            <span class="sx-break">Example: confirmation.html?sid=ABC123</span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="sx-toast" aria-live="polite"></div>
+
+    <!-- Keep your existing confirmation logic -->
+    <script src="./assets/js/confirmation.js"></script>
+
+    <!-- Small drawer logic (same as admin page) -->
+    <script>
+      function sxToggleMenu(open) {
+        const d = document.getElementById("sxDrawer");
+        if (!d) return;
+        d.classList.toggle("sx-open", !!open);
+        d.setAttribute("aria-hidden", open ? "false" : "true");
+        document.documentElement.classList.toggle("sx-lock", !!open);
+        document.body.classList.toggle("sx-lock", !!open);
+      }
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") sxToggleMenu(false);
+      });
+    </script>
+  </body>
+</html>

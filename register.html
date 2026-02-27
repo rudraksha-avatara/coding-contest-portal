@@ -1,0 +1,311 @@
+<!-- register.html (UPDATED, modern landing-style + 100% responsive) -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Register • Coding Contest</title>
+    <meta
+      name="description"
+      content="Individual / Team registration for the coding contest."
+    />
+
+    <!-- Tailwind CDN (optional; app.css handles styling too) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="./assets/css/app.css" />
+
+    <!-- Firebase v8 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="./assets/js/firebase-config.js"></script>
+    <script src="./assets/js/app-common.js"></script>
+  </head>
+
+  <body class="sx-body">
+    <!-- Background -->
+    <div class="sx-bg">
+      <div class="sx-bg-layer sx-bg-grad"></div>
+      <div class="sx-bg-layer sx-bg-grid"></div>
+      <div class="sx-blob sx-blob-a"></div>
+      <div class="sx-blob sx-blob-b"></div>
+      <div class="sx-blob sx-blob-c"></div>
+    </div>
+
+    <div class="sx-container">
+      <!-- Header -->
+      <header class="sx-header">
+        <div class="sx-header-inner">
+          <a href="./index.html" class="sx-brand">
+            <div class="sx-logo-wrap" aria-hidden="true">
+              <div class="sx-logo">CC</div>
+            </div>
+            <div class="sx-brand-text">
+              <h1 class="sx-title">Registration</h1>
+              <p class="sx-subtitle">Individual / Team registration</p>
+            </div>
+          </a>
+
+          <!-- Desktop nav -->
+          <nav class="sx-nav sx-nav-desktop" aria-label="Primary">
+            <a class="sx-link" href="./index.html">Home</a>
+            <a class="sx-link" href="./problems.html">Problems</a>
+            <a class="sx-link" href="./submit.html">Submit</a>
+            <a class="sx-btn sx-btn-primary" href="./find-id.html"
+              >Find Registration ID</a
+            >
+          </nav>
+
+          <!-- Mobile button -->
+          <button
+            class="sx-menu-btn"
+            type="button"
+            aria-label="Open menu"
+            onclick="sxToggleMenu(true)"
+          >
+            <span class="sx-menu-icon"></span>
+          </button>
+        </div>
+
+        <!-- Mobile drawer -->
+        <div class="sx-drawer" id="sxDrawer" aria-hidden="true">
+          <div class="sx-drawer-panel">
+            <div class="sx-drawer-top">
+              <div class="sx-drawer-brand">
+                <div class="sx-logo-wrap" aria-hidden="true">
+                  <div class="sx-logo">CC</div>
+                </div>
+                <div>
+                  <div class="sx-drawer-title">Register</div>
+                  <div class="sx-drawer-sub">Navigation</div>
+                </div>
+              </div>
+              <button
+                class="sx-x"
+                type="button"
+                aria-label="Close menu"
+                onclick="sxToggleMenu(false)"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div class="sx-drawer-links">
+              <a class="sx-drawer-link" href="./index.html">Home</a>
+              <a class="sx-drawer-link" href="./problems.html">Problems</a>
+              <a class="sx-drawer-link" href="./submit.html">Submit</a>
+              <a class="sx-drawer-link" href="./find-id.html"
+                >Find Registration ID</a
+              >
+            </div>
+
+            <div class="sx-drawer-note">
+              Tip: Registration creates a Registration ID you can use later.
+            </div>
+          </div>
+
+          <button
+            class="sx-drawer-backdrop"
+            type="button"
+            aria-label="Close menu"
+            onclick="sxToggleMenu(false)"
+          ></button>
+        </div>
+      </header>
+
+      <main class="sx-main">
+        <!-- Intro -->
+        <section class="sx-card sx-card-soft">
+          <div class="sx-row">
+            <div>
+              <div class="sx-badge">📝 Registration Form</div>
+              <h2 class="sx-h2">Register for the contest</h2>
+              <p class="sx-muted">
+                Fill details carefully. Select <b>Team</b> to unlock team
+                fields. Registration will generate a <b>Registration ID</b> that
+                you’ll use for submissions.
+              </p>
+            </div>
+
+            <div class="sx-actions">
+              <a class="sx-btn sx-btn-primary" href="./problems.html"
+                >View Problems</a
+              >
+              <a class="sx-btn sx-btn-ghost" href="./find-id.html"
+                >Recover ID</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <!-- Form -->
+        <section class="sx-card" style="margin-top: 14px">
+          <div class="sx-card-head">
+            <div>
+              <h3 class="sx-h3">Register</h3>
+              <p class="sx-muted">
+                All fields are required unless marked optional.
+              </p>
+            </div>
+            <div class="sx-pill" id="regHint">Ready</div>
+          </div>
+
+          <form id="regForm" class="sx-form" autocomplete="on" novalidate>
+            <div class="sx-form-grid">
+              <div class="sx-field">
+                <label for="name">Full Name</label>
+                <input
+                  id="name"
+                  required
+                  placeholder="Your name"
+                  autocomplete="name"
+                />
+                <small class="sx-help">As per college records</small>
+              </div>
+
+              <div class="sx-field">
+                <label for="email">Email</label>
+                <input
+                  id="email"
+                  type="email"
+                  required
+                  placeholder="you@example.com"
+                  autocomplete="email"
+                />
+                <small class="sx-help"
+                  >We use this to verify your registration</small
+                >
+              </div>
+
+              <div class="sx-field">
+                <label for="phone">Phone</label>
+                <input
+                  id="phone"
+                  required
+                  placeholder="10-digit phone"
+                  inputmode="numeric"
+                  autocomplete="tel"
+                />
+                <small class="sx-help">Only numbers (10 digits)</small>
+              </div>
+
+              <div class="sx-field">
+                <label for="college">College / Institute</label>
+                <input
+                  id="college"
+                  required
+                  placeholder="College name"
+                  autocomplete="organization"
+                />
+                <small class="sx-help">Example: XYZ College</small>
+              </div>
+
+              <div class="sx-field">
+                <label for="type">Participation Type</label>
+                <select id="type" required>
+                  <option value="individual">Individual</option>
+                  <option value="team">Team</option>
+                </select>
+                <small class="sx-help">Choose Team to add members</small>
+              </div>
+
+              <div class="sx-field">
+                <label for="teamName">Team Name (only for team)</label>
+                <input id="teamName" placeholder="Team name" disabled />
+                <small class="sx-help">Required only if type is Team</small>
+              </div>
+            </div>
+
+            <!-- Team box -->
+            <div
+              id="teamBox"
+              class="sx-card sx-teambox"
+              style="display: none; margin-top: 14px"
+            >
+              <div class="sx-card-head" style="margin-bottom: 10px">
+                <div>
+                  <h3 class="sx-h3">Team Members</h3>
+                  <p class="sx-muted">
+                    Enter up to 3 extra members (optional).
+                  </p>
+                </div>
+                <div class="sx-pill">Team</div>
+              </div>
+
+              <div class="sx-form-grid">
+                <div class="sx-field">
+                  <label for="m1">Member 2 Name</label>
+                  <input id="m1" placeholder="Member 2 name" />
+                </div>
+
+                <div class="sx-field">
+                  <label for="m2">Member 3 Name</label>
+                  <input id="m2" placeholder="Member 3 name" />
+                </div>
+
+                <div class="sx-field">
+                  <label for="m3">Member 4 Name</label>
+                  <input id="m3" placeholder="Member 4 name" />
+                </div>
+
+                <div class="sx-field">
+                  <label for="note">Notes (optional)</label>
+                  <input id="note" placeholder="Any note…" />
+                </div>
+              </div>
+            </div>
+
+            <div class="sx-actions" style="margin-top: 14px">
+              <button id="btnReg" class="sx-btn sx-btn-primary" type="submit">
+                Submit Registration
+              </button>
+              <a class="sx-btn sx-btn-ghost" href="./find-id.html"
+                >I already registered</a
+              >
+            </div>
+          </form>
+
+          <!-- note -->
+          <div class="sx-note" style="margin-top: 14px">
+            <div class="sx-note-icon" aria-hidden="true">✅</div>
+            <div class="sx-note-text">
+              <div class="sx-note-title">After registration</div>
+              <div class="sx-note-desc">
+                You will get a <b>Registration ID</b>. Save it and use it while
+                submitting solutions.
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <footer class="sx-footer">
+          <div class="sx-footer-inner">
+            <span
+              >Tip: Registration creates a Registration ID you can use
+              later.</span
+            >
+            <span class="sx-dot">•</span>
+            <span>Team mode enables Team Name + members.</span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <div class="sx-toast" aria-live="polite"></div>
+    <script src="./assets/js/register.js"></script>
+
+    <script>
+      function sxToggleMenu(open) {
+        const d = document.getElementById("sxDrawer");
+        if (!d) return;
+        d.classList.toggle("sx-open", !!open);
+        d.setAttribute("aria-hidden", open ? "false" : "true");
+        document.documentElement.classList.toggle("sx-lock", !!open);
+        document.body.classList.toggle("sx-lock", !!open);
+      }
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") sxToggleMenu(false);
+      });
+    </script>
+  </body>
+</html>

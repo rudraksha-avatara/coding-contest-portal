@@ -1,0 +1,316 @@
+<!-- submit.html (UPDATED, modern landing-style + 100% responsive + same app.css system) -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Submit Code • Coding Contest</title>
+    <meta
+      name="description"
+      content="Submit your solution URL (GitHub/Drive/Gist) before deadline."
+    />
+
+    <!-- Tailwind CDN (optional; app.css handles styling too) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="./assets/css/app.css" />
+
+    <!-- Firebase v8 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="./assets/js/firebase-config.js"></script>
+    <script src="./assets/js/app-common.js"></script>
+  </head>
+
+  <body class="sx-body">
+    <!-- Background -->
+    <div class="sx-bg">
+      <div class="sx-bg-layer sx-bg-grad"></div>
+      <div class="sx-bg-layer sx-bg-grid"></div>
+      <div class="sx-blob sx-blob-a"></div>
+      <div class="sx-blob sx-blob-b"></div>
+      <div class="sx-blob sx-blob-c"></div>
+    </div>
+
+    <div class="sx-container">
+      <!-- Header -->
+      <header class="sx-header">
+        <div class="sx-header-inner">
+          <a href="./index.html" class="sx-brand">
+            <div class="sx-logo-wrap" aria-hidden="true">
+              <div class="sx-logo">CC</div>
+            </div>
+            <div class="sx-brand-text">
+              <h1 class="sx-title">Submission</h1>
+              <p class="sx-subtitle">
+                Submit your solution URL (GitHub/Drive/Gist)
+              </p>
+            </div>
+          </a>
+
+          <!-- Desktop nav -->
+          <nav class="sx-nav sx-nav-desktop" aria-label="Primary">
+            <a class="sx-link" href="./index.html">Home</a>
+            <a class="sx-link" href="./register.html">Register</a>
+            <a class="sx-link" href="./problems.html">Problems</a>
+            <a class="sx-btn sx-btn-primary" href="./find-submission-id.html"
+              >Find Submission ID</a
+            >
+          </nav>
+
+          <!-- Mobile button -->
+          <button
+            class="sx-menu-btn"
+            type="button"
+            aria-label="Open menu"
+            onclick="sxToggleMenu(true)"
+          >
+            <span class="sx-menu-icon"></span>
+          </button>
+        </div>
+
+        <!-- Mobile drawer -->
+        <div class="sx-drawer" id="sxDrawer" aria-hidden="true">
+          <div class="sx-drawer-panel">
+            <div class="sx-drawer-top">
+              <div class="sx-drawer-brand">
+                <div class="sx-logo-wrap" aria-hidden="true">
+                  <div class="sx-logo">CC</div>
+                </div>
+                <div>
+                  <div class="sx-drawer-title">Submit</div>
+                  <div class="sx-drawer-sub">Navigation</div>
+                </div>
+              </div>
+              <button
+                class="sx-x"
+                type="button"
+                aria-label="Close menu"
+                onclick="sxToggleMenu(false)"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div class="sx-drawer-links">
+              <a class="sx-drawer-link" href="./index.html">Home</a>
+              <a class="sx-drawer-link" href="./register.html">Register</a>
+              <a class="sx-drawer-link" href="./problems.html">Problems</a>
+              <a class="sx-drawer-link" href="./find-submission-id.html"
+                >Find Submission ID</a
+              >
+            </div>
+
+            <div class="sx-drawer-note">
+              Deadline के बाद submit button auto-disable हो जाएगा.
+            </div>
+          </div>
+
+          <button
+            class="sx-drawer-backdrop"
+            type="button"
+            aria-label="Close menu"
+            onclick="sxToggleMenu(false)"
+          ></button>
+        </div>
+      </header>
+
+      <main class="sx-main">
+        <!-- Top hero card -->
+        <section class="sx-card sx-card-soft">
+          <div class="sx-row">
+            <div>
+              <div class="sx-badge">🚀 URL Submission</div>
+              <h2 class="sx-h2">Submit your solution</h2>
+              <p class="sx-muted">
+                Upload नहीं करना है — बस GitHub repo / Google Drive / Gist /
+                Pastebin link paste करो. Notes कम से कम <b>7 characters</b> होने
+                चाहिए.
+              </p>
+            </div>
+
+            <div class="sx-actions">
+              <a class="sx-btn sx-btn-ghost" href="./problems.html"
+                >View Problems</a
+              >
+              <a class="sx-btn sx-btn-primary" href="./find-submission-id.html"
+                >Recover Submission</a
+              >
+            </div>
+          </div>
+
+          <div class="sx-timer-wrap">
+            <div class="sx-badge">⏳ Time Left</div>
+            <div id="timer" class="sx-timer">Loading…</div>
+            <div class="sx-muted sx-break" id="subHintTop"></div>
+          </div>
+        </section>
+
+        <!-- 2-column layout -->
+        <section class="sx-grid-2" style="margin-top: 14px">
+          <!-- Form -->
+          <section class="sx-card">
+            <div class="sx-card-head">
+              <div>
+                <h3 class="sx-h3">Submit Your Code</h3>
+                <p class="sx-muted">
+                  One submission per Reg ID + Problem ID (duplicate blocked).
+                </p>
+              </div>
+              <div class="sx-pill" id="subHint">Ready</div>
+            </div>
+
+            <form id="subForm" class="sx-form" novalidate>
+              <div class="sx-form-grid">
+                <div class="sx-field">
+                  <label for="regId">Registration ID</label>
+                  <input
+                    id="regId"
+                    required
+                    placeholder="Paste your registration ID"
+                    autocomplete="off"
+                  />
+                  <small class="sx-help"
+                    >Use Find Registration ID if you forgot</small
+                  >
+                </div>
+
+                <div class="sx-field">
+                  <label for="problemId">Problem ID</label>
+                  <select id="problemId" required>
+                    <option value="P1">P1</option>
+                    <option value="P2">P2</option>
+                    <option value="P3">P3</option>
+                    <option value="P4">P4</option>
+                    <option value="P5">P5</option>
+                    <option value="P6">P6</option>
+                  </select>
+                  <small class="sx-help">Select correct Problem ID</small>
+                </div>
+
+                <div class="sx-field">
+                  <label for="lang">Language</label>
+                  <select id="lang" required>
+                    <option value="cpp">C++</option>
+                    <option value="c">C</option>
+                    <option value="java">Java</option>
+                    <option value="py">Python</option>
+                    <option value="js">JavaScript</option>
+                    <option value="php">PHP</option>
+                    <option value="rb">Ruby</option>
+                    <option value="go">Go</option>
+                    <option value="rs">Rust</option>
+                    <option value="kt">Kotlin</option>
+                    <option value="swift">Swift</option>
+                    <option value="cs">C#</option>
+                    <option value="scala">Scala</option>
+                    <option value="pl">Perl</option>
+                    <option value="dart">Dart</option>
+                    <option value="m">Matlab</option>
+                    <option value="r">R</option>
+                    <option value="jl">Julia</option>
+                    <option value="hs">Haskell</option>
+                    <option value="clj">Clojure</option>
+                    <option value="fs">F#</option>
+                    <option value="ex">Elixir</option>
+                    <option value="lua">Lua</option>
+                    <option value="sh">Shell</option>
+                    <option value="sql">SQL</option>
+                    <option value="txt">Other (provide in notes)</option>
+                  </select>
+                  <small class="sx-help"
+                    >Choose the primary language used</small
+                  >
+                </div>
+
+                <div class="sx-field">
+                  <label for="codeUrl">Code / Solution URL</label>
+                  <input
+                    id="codeUrl"
+                    type="url"
+                    required
+                    placeholder="https://github.com/user/repo OR https://drive.google.com/..."
+                    autocomplete="off"
+                  />
+                  <small class="sx-help">Only http/https URL accepted</small>
+                </div>
+              </div>
+
+              <div class="sx-field" style="margin-top: 12px">
+                <label for="note">Notes (min 7 chars)</label>
+                <textarea
+                  id="note"
+                  required
+                  minlength="7"
+                  placeholder="Explain briefly…"
+                ></textarea>
+                <small class="sx-help"
+                  >Short explanation about approach / files /
+                  instructions</small
+                >
+              </div>
+
+              <div class="sx-actions" style="margin-top: 14px">
+                <button id="btnSub" class="sx-btn sx-btn-primary" type="submit">
+                  Submit
+                </button>
+                <a class="sx-btn sx-btn-ghost" href="./find-submission-id.html"
+                  >I forgot my Submission ID</a
+                >
+              </div>
+            </form>
+          </section>
+
+          <!-- Rules -->
+          <aside class="sx-card">
+            <h3 class="sx-h3">Submission Rules</h3>
+            <ul class="sx-rulelist" style="margin-top: 10px">
+              <li>Registration ID required</li>
+              <li>Correct Problem ID select करें</li>
+              <li>Notes कम से कम 7 characters</li>
+              <li>Valid URL required (https://...)</li>
+              <li>Deadline के बाद submissions बंद</li>
+              <li>Duplicate submission blocked (per Reg ID + Problem ID)</li>
+            </ul>
+
+            <div class="sx-note" style="margin-top: 14px">
+              <div class="sx-note-icon" aria-hidden="true">ℹ️</div>
+              <div class="sx-note-text">
+                <div class="sx-note-title">Tip</div>
+                <div class="sx-note-desc">
+                  After submit, you’ll get a Submission ID. Save it or use “Find
+                  Submission ID”.
+                </div>
+              </div>
+            </div>
+          </aside>
+        </section>
+
+        <footer class="sx-footer">
+          <div class="sx-footer-inner">
+            <span>Note: Storage not used — URL submission only.</span>
+            <span class="sx-dot">•</span>
+            <span>Confirmation page opens after submit.</span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <div class="sx-toast" aria-live="polite"></div>
+    <script src="./assets/js/submit.js"></script>
+
+    <script>
+      function sxToggleMenu(open) {
+        const d = document.getElementById("sxDrawer");
+        if (!d) return;
+        d.classList.toggle("sx-open", !!open);
+        d.setAttribute("aria-hidden", open ? "false" : "true");
+        document.documentElement.classList.toggle("sx-lock", !!open);
+        document.body.classList.toggle("sx-lock", !!open);
+      }
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") sxToggleMenu(false);
+      });
+    </script>
+  </body>
+</html>

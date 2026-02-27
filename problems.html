@@ -1,0 +1,575 @@
+<!-- problems.html (UPDATED, modern landing style + 100% responsive) -->
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Problems • Coding Contest</title>
+    <meta
+      name="description"
+      content="Read problem statements and note the Problem ID for submission."
+    />
+
+    <!-- Tailwind CDN (optional; app.css already handles the look) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet" href="./assets/css/app.css" />
+    <script src="./assets/js/app-common.js"></script>
+  </head>
+
+  <body class="sx-body">
+    <!-- Background -->
+    <div class="sx-bg">
+      <div class="sx-bg-layer sx-bg-grad"></div>
+      <div class="sx-bg-layer sx-bg-grid"></div>
+      <div class="sx-blob sx-blob-a"></div>
+      <div class="sx-blob sx-blob-b"></div>
+      <div class="sx-blob sx-blob-c"></div>
+    </div>
+
+    <div class="sx-container">
+      <!-- Header -->
+      <header class="sx-header">
+        <div class="sx-header-inner">
+          <a href="./index.html" class="sx-brand">
+            <div class="sx-logo-wrap" aria-hidden="true">
+              <div class="sx-logo">CC</div>
+            </div>
+            <div class="sx-brand-text">
+              <h1 class="sx-title">Problem Statements</h1>
+              <p class="sx-subtitle">Read problems and note the Problem ID</p>
+            </div>
+          </a>
+
+          <!-- Desktop nav -->
+          <nav class="sx-nav sx-nav-desktop" aria-label="Primary">
+            <a class="sx-link" href="./index.html">Home</a>
+            <a class="sx-link" href="./register.html">Register</a>
+            <a class="sx-btn sx-btn-primary" href="./submit.html">Submit</a>
+          </nav>
+
+          <!-- Mobile button -->
+          <button
+            class="sx-menu-btn"
+            type="button"
+            aria-label="Open menu"
+            onclick="sxToggleMenu(true)"
+          >
+            <span class="sx-menu-icon"></span>
+          </button>
+        </div>
+
+        <!-- Mobile drawer -->
+        <div class="sx-drawer" id="sxDrawer" aria-hidden="true">
+          <div class="sx-drawer-panel">
+            <div class="sx-drawer-top">
+              <div class="sx-drawer-brand">
+                <div class="sx-logo-wrap" aria-hidden="true">
+                  <div class="sx-logo">CC</div>
+                </div>
+                <div>
+                  <div class="sx-drawer-title">Problems</div>
+                  <div class="sx-drawer-sub">Navigation</div>
+                </div>
+              </div>
+              <button
+                class="sx-x"
+                type="button"
+                aria-label="Close menu"
+                onclick="sxToggleMenu(false)"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div class="sx-drawer-links">
+              <a class="sx-drawer-link" href="./index.html">Home</a>
+              <a class="sx-drawer-link" href="./register.html">Register</a>
+              <a class="sx-drawer-link" href="./submit.html">Submit</a>
+            </div>
+
+            <div class="sx-drawer-note">
+              Tip: Submission page पर Problem ID डालना mandatory है.
+            </div>
+          </div>
+
+          <button
+            class="sx-drawer-backdrop"
+            type="button"
+            aria-label="Close menu"
+            onclick="sxToggleMenu(false)"
+          ></button>
+        </div>
+      </header>
+
+      <main class="sx-main">
+        <!-- Intro / Search -->
+        <section class="sx-card sx-card-soft">
+          <div class="sx-row">
+            <div>
+              <div class="sx-badge">📚 Problem Bank</div>
+              <h2 class="sx-h2">Choose a problem and build your solution</h2>
+              <p class="sx-muted">
+                Assignment mode: Write your solution and submit as a link/file
+                from the submission page. Note the <b>Problem ID</b> (P1–P6).
+              </p>
+            </div>
+
+            <div class="sx-actions">
+              <a class="sx-btn sx-btn-primary" href="./submit.html"
+                >Go to Submit</a
+              >
+              <a class="sx-btn sx-btn-ghost" href="./register.html">Register</a>
+            </div>
+          </div>
+
+          <div class="sx-prob-toolbar">
+            <div class="sx-field" style="margin: 0">
+              <label for="q" style="margin-bottom: 6px">Search problem</label>
+              <input
+                id="q"
+                placeholder="Search by keyword (email, SEO, bot, fraud, etc.)"
+              />
+            </div>
+
+            <div class="sx-field" style="margin: 0">
+              <label for="filter" style="margin-bottom: 6px"
+                >Filter by ID</label
+              >
+              <select id="filter">
+                <option value="">All</option>
+                <option value="P1">P1</option>
+                <option value="P2">P2</option>
+                <option value="P3">P3</option>
+                <option value="P4">P4</option>
+                <option value="P5">P5</option>
+                <option value="P6">P6</option>
+              </select>
+            </div>
+          </div>
+        </section>
+
+        <!-- Problems grid -->
+        <section class="sx-prob-grid" style="margin-top: 14px" id="grid">
+          <!-- P1 -->
+          <article
+            class="sx-prob-card"
+            data-id="P1"
+            data-text="smart email ai agent medical home classes admission fees timetable doubts"
+          >
+            <div class="sx-prob-top">
+              <div>
+                <h3 class="sx-h3">Smart Email AI Agent</h3>
+                <p class="sx-muted">
+                  Auto-read and reply to institute emails by category.
+                </p>
+              </div>
+              <span class="sx-pill-mini">P1</span>
+            </div>
+
+            <p class="sx-muted" style="margin-top: 10px">
+              Build an AI agent that reads incoming emails for an institute like
+              Medical Home Classes and automatically replies based on topic
+              (admission, fees, timetable, doubts).
+            </p>
+
+            <div class="sx-kv sx-break" style="margin-top: 12px">
+              <div class="sx-kv-row">
+                <div class="sx-k">Input</div>
+                <div class="sx-v">Email text</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Output</div>
+                <div class="sx-v">Auto-generated reply + category</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Problem ID</div>
+                <div class="sx-v"><b>P1</b></div>
+              </div>
+            </div>
+
+            <div class="sx-actions" style="margin-top: 12px">
+              <button
+                class="sx-btn sx-btn-primary"
+                type="button"
+                data-copy="P1"
+              >
+                Copy ID
+              </button>
+              <a class="sx-btn sx-btn-ghost" href="./submit.html"
+                >Submit for P1</a
+              >
+            </div>
+          </article>
+
+          <!-- P2 -->
+          <article
+            class="sx-prob-card"
+            data-id="P2"
+            data-text="ai website optimization agent blaze times seo core web vitals meta tags performance"
+          >
+            <div class="sx-prob-top">
+              <div>
+                <h3 class="sx-h3">AI Website Optimization Agent</h3>
+                <p class="sx-muted">
+                  SEO + Core Web Vitals + performance suggestions.
+                </p>
+              </div>
+              <span class="sx-pill-mini">P2</span>
+            </div>
+
+            <p class="sx-muted" style="margin-top: 10px">
+              Create an AI tool that scans a website like The Blaze Times and
+              gives suggestions for SEO, Core Web Vitals, meta tags, and
+              performance fixes.
+            </p>
+
+            <div class="sx-kv sx-break" style="margin-top: 12px">
+              <div class="sx-kv-row">
+                <div class="sx-k">Input</div>
+                <div class="sx-v">Website URL</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Output</div>
+                <div class="sx-v">Optimization report</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Problem ID</div>
+                <div class="sx-v"><b>P2</b></div>
+              </div>
+            </div>
+
+            <div class="sx-actions" style="margin-top: 12px">
+              <button
+                class="sx-btn sx-btn-primary"
+                type="button"
+                data-copy="P2"
+              >
+                Copy ID
+              </button>
+              <a class="sx-btn sx-btn-ghost" href="./submit.html"
+                >Submit for P2</a
+              >
+            </div>
+          </article>
+
+          <!-- P3 -->
+          <article
+            class="sx-prob-card"
+            data-id="P3"
+            data-text="developer automation ai agent deployment log monitoring error fixing script generation"
+          >
+            <div class="sx-prob-top">
+              <div>
+                <h3 class="sx-h3">Developer Automation AI Agent</h3>
+                <p class="sx-muted">
+                  Generate scripts/commands for repetitive dev tasks.
+                </p>
+              </div>
+              <span class="sx-pill-mini">P3</span>
+            </div>
+
+            <p class="sx-muted" style="margin-top: 10px">
+              Build an AI assistant that helps developers automate repetitive
+              work like deployment, log monitoring, error fixing, and script
+              generation.
+            </p>
+
+            <div class="sx-kv sx-break" style="margin-top: 12px">
+              <div class="sx-kv-row">
+                <div class="sx-k">Input</div>
+                <div class="sx-v">Task description</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Output</div>
+                <div class="sx-v">Automation script or command</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Problem ID</div>
+                <div class="sx-v"><b>P3</b></div>
+              </div>
+            </div>
+
+            <div class="sx-actions" style="margin-top: 12px">
+              <button
+                class="sx-btn sx-btn-primary"
+                type="button"
+                data-copy="P3"
+              >
+                Copy ID
+              </button>
+              <a class="sx-btn sx-btn-ghost" href="./submit.html"
+                >Submit for P3</a
+              >
+            </div>
+          </article>
+
+          <!-- P4 -->
+          <article
+            class="sx-prob-card"
+            data-id="P4"
+            data-text="ai government service helper chatbot schemes forms upload documents hindi marathi english"
+          >
+            <div class="sx-prob-top">
+              <div>
+                <h3 class="sx-h3">AI Government Service Helper</h3>
+                <p class="sx-muted">
+                  Explain schemes + guide forms in simple language.
+                </p>
+              </div>
+              <span class="sx-pill-mini">P4</span>
+            </div>
+
+            <p class="sx-muted" style="margin-top: 10px">
+              Create an AI chatbot that helps people understand government
+              schemes, fill forms, and upload documents in simple
+              Hindi/Marathi/English.
+            </p>
+
+            <div class="sx-kv sx-break" style="margin-top: 12px">
+              <div class="sx-kv-row">
+                <div class="sx-k">Input</div>
+                <div class="sx-v">User question</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Output</div>
+                <div class="sx-v">Step-by-step help</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Problem ID</div>
+                <div class="sx-v"><b>P4</b></div>
+              </div>
+            </div>
+
+            <div class="sx-actions" style="margin-top: 12px">
+              <button
+                class="sx-btn sx-btn-primary"
+                type="button"
+                data-copy="P4"
+              >
+                Copy ID
+              </button>
+              <a class="sx-btn sx-btn-ghost" href="./submit.html"
+                >Submit for P4</a
+              >
+            </div>
+          </article>
+
+          <!-- P5 -->
+          <article
+            class="sx-prob-card"
+            data-id="P5"
+            data-text="ai traffic fraud detection agent suspicious clicks bots adsense analytics block ips"
+          >
+            <div class="sx-prob-top">
+              <div>
+                <h3 class="sx-h3">AI Traffic Fraud Detection Agent</h3>
+                <p class="sx-muted">
+                  Detect bots/suspicious clicks and protect AdSense.
+                </p>
+              </div>
+              <span class="sx-pill-mini">P5</span>
+            </div>
+
+            <p class="sx-muted" style="margin-top: 10px">
+              Build an AI system that detects suspicious clicks or bots on a
+              website and blocks them automatically to protect AdSense and
+              analytics data.
+            </p>
+
+            <div class="sx-kv sx-break" style="margin-top: 12px">
+              <div class="sx-kv-row">
+                <div class="sx-k">Input</div>
+                <div class="sx-v">Traffic logs / IP data</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Output</div>
+                <div class="sx-v">Fraud alert + blocked IPs</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Problem ID</div>
+                <div class="sx-v"><b>P5</b></div>
+              </div>
+            </div>
+
+            <div class="sx-actions" style="margin-top: 12px">
+              <button
+                class="sx-btn sx-btn-primary"
+                type="button"
+                data-copy="P5"
+              >
+                Copy ID
+              </button>
+              <a class="sx-btn sx-btn-ghost" href="./submit.html"
+                >Submit for P5</a
+              >
+            </div>
+          </article>
+
+          <!-- P6 -->
+          <article
+            class="sx-prob-card"
+            data-id="P6"
+            data-text="ai telegram bot builder file upload bot stats command announcements buttons"
+          >
+            <div class="sx-prob-top">
+              <div>
+                <h3 class="sx-h3">AI Telegram Bot Builder</h3>
+                <p class="sx-muted">
+                  Generate Telegram bot code from requirements.
+                </p>
+              </div>
+              <span class="sx-pill-mini">P6</span>
+            </div>
+
+            <p class="sx-muted" style="margin-top: 10px">
+              Build an AI agent that creates Telegram bots automatically based
+              on user needs like file upload bot, stats command, announcements,
+              etc.
+            </p>
+
+            <div class="sx-kv sx-break" style="margin-top: 12px">
+              <div class="sx-kv-row">
+                <div class="sx-k">Input</div>
+                <div class="sx-v">Bot requirement text</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Output</div>
+                <div class="sx-v">Working bot code</div>
+              </div>
+              <div class="sx-kv-row">
+                <div class="sx-k">Problem ID</div>
+                <div class="sx-v"><b>P6</b></div>
+              </div>
+            </div>
+
+            <div class="sx-actions" style="margin-top: 12px">
+              <button
+                class="sx-btn sx-btn-primary"
+                type="button"
+                data-copy="P6"
+              >
+                Copy ID
+              </button>
+              <a class="sx-btn sx-btn-ghost" href="./submit.html"
+                >Submit for P6</a
+              >
+            </div>
+          </article>
+        </section>
+
+        <!-- Download -->
+        <section class="sx-card" style="margin-top: 14px">
+          <div class="sx-row">
+            <div>
+              <h3 class="sx-h3">Download (optional)</h3>
+              <p class="sx-muted">
+                अगर teacher PDF चाहता है, तुम यहाँ PDF link रख सकते हो.
+              </p>
+            </div>
+            <div class="sx-actions">
+              <a
+                class="sx-btn sx-btn-ghost"
+                href="#"
+                onclick="
+                  alert('Add your PDF link here');
+                  return false;
+                "
+                >Download PDF</a
+              >
+            </div>
+          </div>
+        </section>
+
+        <footer class="sx-footer">
+          <div class="sx-footer-inner">
+            <span>Tip: Submission page पर Problem ID डालना mandatory है.</span>
+            <span class="sx-dot">•</span>
+            <span>Copy ID button use kar ke direct paste karo.</span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <div class="sx-toast" aria-live="polite"></div>
+
+    <!-- Inline page logic (no extra file needed) -->
+    <script>
+      function sxToggleMenu(open) {
+        const d = document.getElementById("sxDrawer");
+        if (!d) return;
+        d.classList.toggle("sx-open", !!open);
+        d.setAttribute("aria-hidden", open ? "false" : "true");
+        document.documentElement.classList.toggle("sx-lock", !!open);
+        document.body.classList.toggle("sx-lock", !!open);
+      }
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") sxToggleMenu(false);
+      });
+
+      // Search + filter
+      const q = document.getElementById("q");
+      const filter = document.getElementById("filter");
+      const cards = Array.from(document.querySelectorAll(".sx-prob-card"));
+
+      function applyFilter() {
+        const text = (q.value || "").toLowerCase().trim();
+        const id = filter.value || "";
+        let shown = 0;
+
+        cards.forEach((c) => {
+          const cid = c.getAttribute("data-id") || "";
+          const hay = (c.getAttribute("data-text") || "").toLowerCase();
+          const okText =
+            !text || hay.includes(text) || cid.toLowerCase().includes(text);
+          const okId = !id || cid === id;
+          const show = okText && okId;
+          c.style.display = show ? "" : "none";
+          if (show) shown++;
+        });
+
+        if (!shown) setToast("No matching problems.", "error");
+      }
+
+      q.addEventListener("input", applyFilter);
+      filter.addEventListener("change", applyFilter);
+
+      // Copy buttons
+      async function copyText(value) {
+        try {
+          await navigator.clipboard.writeText(value);
+          return true;
+        } catch {
+          try {
+            const ta = document.createElement("textarea");
+            ta.value = value;
+            ta.setAttribute("readonly", "");
+            ta.style.position = "fixed";
+            ta.style.left = "-9999px";
+            document.body.appendChild(ta);
+            ta.select();
+            const ok = document.execCommand("copy");
+            document.body.removeChild(ta);
+            return !!ok;
+          } catch {
+            return false;
+          }
+        }
+      }
+
+      document.addEventListener("click", async (e) => {
+        const btn = e.target.closest("[data-copy]");
+        if (!btn) return;
+        const id = btn.getAttribute("data-copy");
+        const ok = await copyText(id);
+        const old = btn.textContent;
+        btn.textContent = ok ? "Copied ✅" : "Copy failed";
+        setToast(
+          ok ? "Copied: " + id : "Copy failed.",
+          ok ? "success" : "error",
+        );
+        setTimeout(() => (btn.textContent = old), 900);
+      });
+    </script>
+  </body>
+</html>

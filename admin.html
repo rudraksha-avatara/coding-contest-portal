@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Admin • Coding Contest</title>
+    <meta
+      name="description"
+      content="Admin dashboard to view registrations and submissions."
+    />
+
+    <!-- ✅ Tailwind (CDN) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- ✅ Reusable app.css (you can use everywhere) -->
+    <link rel="stylesheet" href="./assets/css/app.css" />
+
+    <!-- Firebase v8 -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
+    <script src="./assets/js/firebase-config.js"></script>
+    <script src="./assets/js/app-common.js"></script>
+  </head>
+
+  <body class="sx-body">
+    <!-- Background -->
+    <div class="sx-bg">
+      <div class="sx-bg-layer sx-bg-grad"></div>
+      <div class="sx-bg-layer sx-bg-grid"></div>
+      <div class="sx-blob sx-blob-a"></div>
+      <div class="sx-blob sx-blob-b"></div>
+      <div class="sx-blob sx-blob-c"></div>
+    </div>
+
+    <div class="sx-container">
+      <!-- Header -->
+      <header class="sx-header">
+        <div class="sx-header-inner">
+          <!-- Brand -->
+          <a href="./index.html" class="sx-brand">
+            <div class="sx-logo-wrap" aria-hidden="true">
+              <div class="sx-logo">AD</div>
+            </div>
+            <div class="sx-brand-text">
+              <h1 class="sx-title">Admin Dashboard</h1>
+              <p class="sx-subtitle">View registrations & submissions</p>
+            </div>
+          </a>
+
+          <!-- Desktop Nav -->
+          <nav class="sx-nav sx-nav-desktop" aria-label="Primary">
+            <a class="sx-link" href="./index.html">Home</a>
+            <a class="sx-link" href="./problems.html">Problems</a>
+
+            <button
+              class="sx-btn sx-btn-danger"
+              type="button"
+              onclick="sxAdminLogout()"
+            >
+              Logout
+            </button>
+          </nav>
+
+          <!-- Mobile Menu Button -->
+          <button
+            class="sx-menu-btn"
+            type="button"
+            aria-label="Open menu"
+            onclick="sxToggleMenu(true)"
+          >
+            <span class="sx-menu-icon"></span>
+          </button>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div class="sx-drawer" id="sxDrawer" aria-hidden="true">
+          <div class="sx-drawer-panel">
+            <div class="sx-drawer-top">
+              <div class="sx-drawer-brand">
+                <div class="sx-logo-wrap" aria-hidden="true">
+                  <div class="sx-logo">AD</div>
+                </div>
+                <div>
+                  <div class="sx-drawer-title">Admin</div>
+                  <div class="sx-drawer-sub">Quick actions</div>
+                </div>
+              </div>
+              <button
+                class="sx-x"
+                type="button"
+                aria-label="Close menu"
+                onclick="sxToggleMenu(false)"
+              >
+                ✕
+              </button>
+            </div>
+
+            <div class="sx-drawer-links">
+              <a class="sx-drawer-link" href="./index.html">Home</a>
+              <a class="sx-drawer-link" href="./problems.html">Problems</a>
+              <button
+                class="sx-drawer-link sx-drawer-danger"
+                type="button"
+                onclick="sxAdminLogout()"
+              >
+                Logout
+              </button>
+            </div>
+
+            <div class="sx-drawer-note">
+              For assignment, admin is open. In production, add proper auth.
+            </div>
+          </div>
+
+          <button
+            class="sx-drawer-backdrop"
+            type="button"
+            aria-label="Close menu"
+            onclick="sxToggleMenu(false)"
+          ></button>
+        </div>
+      </header>
+
+      <!-- Main -->
+      <main class="sx-main">
+        <!-- Top summary row -->
+        <section class="sx-summary">
+          <div class="sx-card sx-card-soft">
+            <div class="sx-row">
+              <div>
+                <div class="sx-badge">📌 Admin Panel</div>
+                <h2 class="sx-h2">Latest activity overview</h2>
+                <p class="sx-muted">
+                  You can view the latest 25 registrations and submissions
+                  below. Long IDs/links will wrap automatically.
+                </p>
+              </div>
+
+              <div class="sx-actions">
+                <button
+                  class="sx-btn sx-btn-primary"
+                  type="button"
+                  onclick="location.reload()"
+                >
+                  Refresh
+                </button>
+                <a class="sx-btn sx-btn-ghost" href="./submit.html"
+                  >Go to Submit</a
+                >
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Two columns -->
+        <section class="sx-grid-2">
+          <!-- Registrations -->
+          <section class="sx-card">
+            <div class="sx-card-head">
+              <div>
+                <h3 class="sx-h3">Registrations</h3>
+                <p class="sx-muted">Latest 25</p>
+              </div>
+              <div class="sx-pill" id="regCount">—</div>
+            </div>
+
+            <div class="sx-list" id="regList">
+              <div class="sx-skeleton">
+                <div class="sx-skel-line w-60"></div>
+                <div class="sx-skel-line w-40"></div>
+                <div class="sx-skel-line w-72"></div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Submissions -->
+          <section class="sx-card">
+            <div class="sx-card-head">
+              <div>
+                <h3 class="sx-h3">Submissions</h3>
+                <p class="sx-muted">Latest 25</p>
+              </div>
+              <div class="sx-pill" id="subCount">—</div>
+            </div>
+
+            <div class="sx-list" id="subList">
+              <div class="sx-skeleton">
+                <div class="sx-skel-line w-64"></div>
+                <div class="sx-skel-line w-44"></div>
+                <div class="sx-skel-line w-80"></div>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <!-- Footer note -->
+        <footer class="sx-footer">
+          <div class="sx-footer-inner">
+            <span>For assignment, admin is open.</span>
+            <span class="sx-dot">•</span>
+            <span>In production, add auth + role checks.</span>
+          </div>
+        </footer>
+      </main>
+    </div>
+
+    <!-- Toast -->
+    <div class="sx-toast" aria-live="polite"></div>
+
+    <!-- Your existing admin logic -->
+    <script src="./assets/js/admin.js"></script>
+
+    <!-- Mobile drawer logic (tiny, safe) -->
+    <script>
+      function sxToggleMenu(open) {
+        const d = document.getElementById("sxDrawer");
+        if (!d) return;
+        d.classList.toggle("sx-open", !!open);
+        d.setAttribute("aria-hidden", open ? "false" : "true");
+        document.documentElement.classList.toggle("sx-lock", !!open);
+        document.body.classList.toggle("sx-lock", !!open);
+      }
+      // ESC to close
+      window.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") sxToggleMenu(false);
+      });
+    </script>
+  </body>
+</html>

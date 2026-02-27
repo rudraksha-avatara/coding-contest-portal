@@ -1,0 +1,948 @@
+/* app.css — reusable across all pages (sx-* scoped) */
+
+/* Basic reset */
+.sx-body * {
+  box-sizing: border-box;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+  word-break: break-all;
+  overflow-wrap: break-word;
+}
+html.sx-lock,
+body.sx-lock {
+  overflow: hidden;
+}
+
+/* Body */
+.sx-body {
+  min-height: 100vh;
+  font-family:
+    ui-sans-serif,
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
+  color: #e5e7eb;
+  background: #020617; /* slate-950 */
+}
+
+/* Background layers */
+.sx-bg {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+}
+.sx-bg-layer {
+  position: absolute;
+  inset: 0;
+}
+.sx-bg-grad {
+  background:
+    radial-gradient(
+      1200px 600px at 50% -10%,
+      rgba(59, 130, 246, 0.18),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 520px at 100% 10%,
+      rgba(34, 197, 94, 0.15),
+      transparent 60%
+    ),
+    radial-gradient(
+      900px 520px at 0% 100%,
+      rgba(168, 85, 247, 0.12),
+      transparent 55%
+    ),
+    linear-gradient(180deg, #020617 0%, #020617 60%, #0b1224 100%);
+}
+.sx-bg-grid {
+  opacity: 0.55;
+  background-image: radial-gradient(
+    circle at 1px 1px,
+    rgba(148, 163, 184, 0.32) 1px,
+    transparent 0
+  );
+  background-size: 18px 18px;
+}
+
+/* Blobs */
+.sx-blob {
+  position: absolute;
+  width: 340px;
+  height: 340px;
+  border-radius: 999px;
+  filter: blur(45px);
+  opacity: 0.35;
+}
+.sx-blob-a {
+  top: -90px;
+  left: -90px;
+  background: rgba(59, 130, 246, 1);
+}
+.sx-blob-b {
+  top: 40px;
+  right: -100px;
+  background: rgba(34, 197, 94, 1);
+}
+.sx-blob-c {
+  bottom: -120px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(168, 85, 247, 1);
+  opacity: 0.22;
+}
+
+/* Container */
+.sx-container {
+  width: 100%;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 18px 16px 46px;
+}
+
+/* Header (sticky) */
+.sx-header {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  padding: 10px 0 14px;
+  backdrop-filter: blur(10px);
+}
+.sx-header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 12px 12px;
+  border-radius: 16px;
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 30px rgba(2, 6, 23, 0.2);
+}
+
+/* Brand */
+.sx-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: inherit;
+  min-width: 0;
+}
+.sx-logo-wrap {
+  border-radius: 18px;
+  padding: 1px;
+  background: linear-gradient(
+    90deg,
+    rgba(59, 130, 246, 0.8),
+    rgba(34, 197, 94, 0.8),
+    rgba(168, 85, 247, 0.8)
+  );
+}
+.sx-logo {
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 17px;
+  background: rgba(2, 6, 23, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  font-size: 12px;
+}
+.sx-brand-text {
+  min-width: 0;
+}
+.sx-title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+.sx-subtitle {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.8);
+}
+
+/* Nav */
+.sx-nav {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sx-nav-desktop {
+  display: none;
+}
+@media (min-width: 900px) {
+  .sx-nav-desktop {
+    display: flex;
+  }
+  .sx-menu-btn {
+    display: none;
+  }
+}
+
+.sx-link {
+  text-decoration: none;
+  color: rgba(226, 232, 240, 0.9);
+  font-size: 14px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  transition: 0.2s ease;
+}
+.sx-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+  color: #fff;
+}
+
+/* Buttons */
+.sx-btn {
+  appearance: none;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 10px 14px;
+  border-radius: 12px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: 0.2s ease;
+  white-space: nowrap;
+}
+.sx-btn:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.sx-btn:active {
+  transform: translateY(1px);
+}
+
+.sx-btn-primary {
+  border-color: rgba(59, 130, 246, 0.35);
+  background: rgba(59, 130, 246, 0.9);
+  color: #fff;
+}
+.sx-btn-primary:hover {
+  background: rgba(59, 130, 246, 0.8);
+}
+
+.sx-btn-ghost {
+  background: rgba(255, 255, 255, 0.03);
+}
+.sx-btn-danger {
+  border-color: rgba(239, 68, 68, 0.35);
+  background: rgba(239, 68, 68, 0.12);
+  color: rgba(254, 202, 202, 1);
+}
+.sx-btn-danger:hover {
+  background: rgba(239, 68, 68, 0.18);
+}
+
+/* Mobile menu button */
+.sx-menu-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  cursor: pointer;
+}
+.sx-menu-icon {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: rgba(226, 232, 240, 0.95);
+  margin: 0 auto;
+  position: relative;
+  border-radius: 2px;
+}
+.sx-menu-icon::before,
+.sx-menu-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 18px;
+  height: 2px;
+  background: rgba(226, 232, 240, 0.95);
+  border-radius: 2px;
+}
+.sx-menu-icon::before {
+  top: -6px;
+}
+.sx-menu-icon::after {
+  top: 6px;
+}
+
+/* Drawer */
+.sx-drawer {
+  position: fixed;
+  inset: 0;
+  display: none;
+  z-index: 60;
+}
+.sx-drawer.sx-open {
+  display: block;
+}
+.sx-drawer-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(2, 6, 23, 0.65);
+  border: none;
+}
+.sx-drawer-panel {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  left: 14px;
+  margin: 0 auto;
+  max-width: 560px;
+  border-radius: 18px;
+  background: rgba(2, 6, 23, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 18px 60px rgba(2, 6, 23, 0.45);
+  overflow: hidden;
+}
+.sx-drawer-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.sx-drawer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.sx-drawer-title {
+  font-weight: 900;
+}
+.sx-drawer-sub {
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.75);
+}
+.sx-x {
+  width: 40px;
+  height: 40px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: #fff;
+  cursor: pointer;
+}
+.sx-drawer-links {
+  padding: 10px 14px 6px;
+  display: grid;
+  gap: 10px;
+}
+.sx-drawer-link {
+  text-decoration: none;
+  border-radius: 14px;
+  padding: 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(226, 232, 240, 0.95);
+  font-weight: 700;
+  cursor: pointer;
+  text-align: left;
+}
+.sx-drawer-link:hover {
+  background: rgba(255, 255, 255, 0.06);
+}
+.sx-drawer-danger {
+  border-color: rgba(239, 68, 68, 0.3);
+  background: rgba(239, 68, 68, 0.12);
+  color: rgba(254, 202, 202, 1);
+}
+.sx-drawer-note {
+  padding: 12px 14px 14px;
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.75);
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Main */
+.sx-main {
+  margin-top: 14px;
+}
+.sx-summary {
+  margin-bottom: 14px;
+}
+
+.sx-card {
+  border-radius: 18px;
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 14px 42px rgba(2, 6, 23, 0.2);
+  padding: 16px;
+}
+@media (min-width: 640px) {
+  .sx-card {
+    padding: 18px;
+  }
+}
+.sx-card-soft {
+  background: rgba(2, 6, 23, 0.4);
+}
+
+.sx-row {
+  display: flex;
+  gap: 14px;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.sx-actions {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.sx-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.95);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.sx-h2 {
+  margin: 10px 0 6px;
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.sx-h3 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+}
+.sx-muted {
+  margin: 0;
+  color: rgba(226, 232, 240, 0.75);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+/* Two column grid */
+.sx-grid-2 {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 980px) {
+  .sx-grid-2 {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* Card header row */
+.sx-card-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.sx-pill {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(226, 232, 240, 0.85);
+}
+
+/* List area */
+.sx-list {
+  display: grid;
+  gap: 10px;
+  max-height: 62vh;
+  overflow: auto;
+  padding-right: 4px;
+}
+.sx-list::-webkit-scrollbar {
+  width: 10px;
+}
+.sx-list::-webkit-scrollbar-thumb {
+  background: rgba(148, 163, 184, 0.22);
+  border-radius: 999px;
+  border: 2px solid rgba(2, 6, 23, 0.35);
+}
+.sx-list::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Universal word break helper (very important for IDs/URLs) */
+.sx-break {
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+/* Skeleton */
+.sx-skeleton {
+  display: grid;
+  gap: 10px;
+}
+.sx-skel-line {
+  height: 12px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0.06),
+    rgba(255, 255, 255, 0.12),
+    rgba(255, 255, 255, 0.06)
+  );
+  background-size: 200% 100%;
+  animation: sx-shimmer 1.2s linear infinite;
+}
+.w-40 {
+  width: 40%;
+}
+.w-60 {
+  width: 60%;
+}
+.w-64 {
+  width: 64%;
+}
+.w-72 {
+  width: 72%;
+}
+.w-80 {
+  width: 80%;
+}
+@keyframes sx-shimmer {
+  0% {
+    background-position: 0% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Footer */
+.sx-footer {
+  margin-top: 14px;
+}
+.sx-footer-inner {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 10px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(226, 232, 240, 0.8);
+  font-size: 12px;
+}
+.sx-dot {
+  opacity: 0.55;
+}
+
+/* Toast base (if you already use sxToast from app-common.js, it will work) */
+.sx-toast {
+  position: fixed;
+  left: 50%;
+  bottom: 18px;
+  transform: translateX(-50%);
+  width: min(92vw, 560px);
+  z-index: 80;
+  pointer-events: none;
+}
+
+.sx-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 18px;
+  overflow: hidden;
+  text-align: left;
+}
+
+.sx-table th,
+.sx-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Thin scrollbar */
+::-webkit-scrollbar {
+  width: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #b5b5b5;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+/* Confirmation extras (safe) */
+.sx-note {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  border-radius: 16px;
+  padding: 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+.sx-note-icon {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  background: rgba(59, 130, 246, 0.12);
+  border: 1px solid rgba(59, 130, 246, 0.25);
+  flex: 0 0 auto;
+}
+.sx-note-title {
+  font-weight: 900;
+  margin-bottom: 2px;
+}
+.sx-note-desc {
+  font-size: 13px;
+  color: rgba(226, 232, 240, 0.75);
+  line-height: 1.55;
+}
+
+/* ---------- Forms (Find ID page) ---------- */
+.sx-form {
+  margin-top: 8px;
+}
+
+.sx-form-grid {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 860px) {
+  .sx-form-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sx-field label {
+  display: block;
+  font-size: 13px;
+  font-weight: 800;
+  margin-bottom: 6px;
+  color: rgba(226, 232, 240, 0.92);
+}
+
+.sx-field input {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(226, 232, 240, 0.95);
+  outline: none;
+  transition: 0.2s ease;
+}
+.sx-field input::placeholder {
+  color: rgba(226, 232, 240, 0.45);
+}
+.sx-field input:focus {
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+}
+
+.sx-help {
+  display: block;
+  margin-top: 6px;
+  font-size: 12px;
+  color: rgba(226, 232, 240, 0.65);
+}
+
+/* Key-value grid (resultKv) */
+.sx-kv {
+  margin-top: 8px;
+  display: grid;
+  gap: 10px;
+}
+.sx-kv .sx-kv-row {
+  display: grid;
+  grid-template-columns: 140px 1fr;
+  gap: 10px;
+  align-items: start;
+  padding: 10px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+@media (max-width: 520px) {
+  .sx-kv .sx-kv-row {
+    grid-template-columns: 1fr;
+  }
+}
+.sx-kv .sx-k {
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(226, 232, 240, 0.8);
+}
+.sx-kv .sx-v {
+  font-size: 13px;
+  color: rgba(226, 232, 240, 0.95);
+}
+
+/* Result box */
+.sx-result {
+  background: rgba(34, 197, 94, 0.06);
+  border-color: rgba(34, 197, 94, 0.18);
+}
+
+/* ✅ APPEND to assets/css/app.css (only if not already present)
+   Adds select + table + responsive "mobile cards" for submissions list */
+
+.sx-field select {
+  width: 100%;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(226, 232, 240, 0.95);
+  outline: none;
+  transition: 0.2s ease;
+}
+.sx-field select:focus {
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+}
+
+/* links */
+.sx-a {
+  color: rgba(147, 197, 253, 0.95);
+  text-decoration: none;
+  font-weight: 800;
+}
+.sx-a:hover {
+  text-decoration: underline;
+}
+
+/* table (desktop) */
+.sx-table {
+  width: 100%;
+  border-collapse: collapse;
+  overflow: hidden;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.02);
+}
+.sx-table th,
+.sx-table td {
+  padding: 12px 12px;
+  vertical-align: top;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+.sx-table th {
+  text-align: left;
+  font-size: 12px;
+  font-weight: 900;
+  color: rgba(226, 232, 240, 0.85);
+  background: rgba(255, 255, 255, 0.03);
+}
+.sx-table td {
+  font-size: 13px;
+  color: rgba(226, 232, 240, 0.92);
+}
+
+/* responsive list render */
+.sx-only-mobile {
+  display: grid;
+  gap: 10px;
+}
+.sx-only-desktop {
+  display: none;
+}
+
+@media (min-width: 860px) {
+  .sx-only-mobile {
+    display: none;
+  }
+  .sx-only-desktop {
+    display: block;
+  }
+}
+
+/* mobile cards */
+.sx-sub-card {
+  border-radius: 16px;
+  padding: 12px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+}
+.sx-sub-top {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+.sx-pill-mini {
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(226, 232, 240, 0.8);
+  white-space: nowrap;
+}
+.sx-sub-meta {
+  margin-top: 6px;
+}
+.sx-sub-link {
+  margin-top: 8px;
+}
+
+/* hint pill state helpers (optional) */
+.sx-pill-load {
+  border-color: rgba(59, 130, 246, 0.25);
+}
+.sx-pill-ok {
+  border-color: rgba(34, 197, 94, 0.25);
+}
+.sx-pill-bad {
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+/* ✅ APPEND to app.css for Problems page layout (safe sx-* only) */
+
+.sx-prob-toolbar {
+  margin-top: 12px;
+  display: grid;
+  gap: 12px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 860px) {
+  .sx-prob-toolbar {
+    grid-template-columns: 1.3fr 0.7fr;
+    align-items: end;
+  }
+}
+
+.sx-prob-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 860px) {
+  .sx-prob-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.sx-prob-card {
+  border-radius: 18px;
+  background: rgba(2, 6, 23, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 14px 42px rgba(2, 6, 23, 0.2);
+  padding: 16px;
+}
+@media (min-width: 640px) {
+  .sx-prob-card {
+    padding: 18px;
+  }
+}
+
+.sx-prob-top {
+  display: flex;
+  gap: 12px;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+/* ✅ APPEND to app.css for Register page (safe sx-*) */
+
+.sx-teambox {
+  background: rgba(59, 130, 246, 0.06);
+  border-color: rgba(59, 130, 246, 0.18);
+}
+
+/* hint pill state helpers (optional; shared with other pages) */
+.sx-pill-load {
+  border-color: rgba(59, 130, 246, 0.25);
+}
+.sx-pill-ok {
+  border-color: rgba(34, 197, 94, 0.25);
+}
+.sx-pill-bad {
+  border-color: rgba(239, 68, 68, 0.25);
+}
+
+/* ✅ APPEND to app.css for Submit page (safe sx-*) */
+
+.sx-timer-wrap {
+  margin-top: 12px;
+  display: grid;
+  gap: 8px;
+}
+
+.sx-timer {
+  font-weight: 900;
+  font-size: 22px;
+  letter-spacing: -0.02em;
+  padding: 12px 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(226, 232, 240, 0.95);
+}
+.sx-timer.closed {
+  border-color: rgba(239, 68, 68, 0.2);
+  background: rgba(239, 68, 68, 0.1);
+  color: rgba(254, 202, 202, 1);
+}
+
+.sx-field textarea {
+  width: 100%;
+  min-height: 120px;
+  resize: vertical;
+  padding: 12px 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.03);
+  color: rgba(226, 232, 240, 0.95);
+  outline: none;
+  transition: 0.2s ease;
+}
+.sx-field textarea::placeholder {
+  color: rgba(226, 232, 240, 0.45);
+}
+.sx-field textarea:focus {
+  border-color: rgba(59, 130, 246, 0.35);
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.12);
+}
