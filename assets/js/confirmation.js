@@ -60,7 +60,9 @@
   // No SID
   // -----------------------------
   if (!sid) {
-    renderError("No Submission ID found in URL. Example: confirmation.html?sid=12345");
+    renderError(
+      "No Submission ID found in URL. Example: confirmation.html?sid=12345",
+    );
     return;
   }
 
